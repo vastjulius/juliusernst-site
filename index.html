@@ -69,13 +69,15 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .tracks li { display: contents; }
 .muted { color: var(--muted); }
 .lines { display: grid; gap: 0; }
-.text p { margin: 0 0 1em; max-width: 46ch; }
+.label { display: grid; gap: 0; justify-items: start; }
+.label h2 { margin-bottom: 0; }
+.label .yr { margin-bottom: 1em; }
+.text p { margin: 0 0 1em; max-width: 46ch; white-space: pre-line; }
 .text p:last-child { margin-bottom: 0; }
 .imgs { display: grid; gap: 12px; }
 .imgs { margin-bottom: 12px; }
 .imgs img { margin-bottom: 0; }
 .nav { display: flex; gap: 1.5em; margin-top: 16px; }
-. { position: fixed; bottom: 4vh; right: 3.3vw; display: block; line-height: 0; }
 .home { position: fixed; bottom: 4vh; right: 3.3vw; display: block; line-height: 0; }
 .home img { width: 60px; height: auto; display: block; }
 .logo { display: block; width: 300px; max-width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; margin-bottom: 12px; }
@@ -116,10 +118,11 @@ const SITE = {
       { title: "[Single title]", length: "00:00" }
     ],
     credits: [
-      "Written, performed and produced by Julius Ernst",
+      "Recorded at [place], [year]",
+      "Engineered by [name]",
       "Mixed by [name]",
       "Mastered by [name]",
-      "℗ & © 2026 [label]"
+      "Cover photograph by [name]"
     ],
     links: [
       { label: "YouTube", url: "" },
@@ -130,24 +133,24 @@ const SITE = {
     physical: []
   },
 
-  bio: "Musician, director and cinematographer Julius Ernst has been active within the world of music since the early 2010s. At 19, he toured the United States, and later toured Europe, including a run opening for Iceage. Alongside the music, he works as a cinematographer and director. Julius graduated from the National Film School of Denmark, where he made fragmented, associative films built as much from sound and music as from image. He now releases music under his given name.",
+  bio: "Musician, director and cinematographer Julius Ernst has been active within the world of music since the early 2010s. At 19, he toured the United States, and later toured Europe, including a run opening for fellow Copenhageners Iceage. Alongside the music, he works as a cinematographer and director. Julius graduated from the National Film School of Denmark, where he made fragmented, associative films built as much from sound and music as from image. He now releases music under his given name.",
 
   archive: [
     {
       title: "Films",
       items: [
         { title: "All Things Pass and Will Pass Again / Aiuto", year: "2025",
-          page: { text: ["DCP, 30 min.", "A sensory, fragmented film about what remains after loss."],
+          page: { text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
                   linksTitle: "",
                   links: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }] } },
         { title: "Territorie", year: "2024",
-          page: { text: ["DCP, 32 min.", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
+          page: { text: ["DCP, 32 min\nDenmark\nDanish", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
         { title: "Untitled", year: "2023",
-          page: { text: ["DCP, 15 min.", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
+          page: { text: ["DCP, 15 min\nDenmark\nFarsi / Danish", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
                   linksTitle: "",
                   links: [{ label: "FAMUFEST", url: "https://famufest.cz/films/film/untitled" }] } },
         { title: "Gregoris Mountain", year: "2021",
-          page: { text: ["40 min.", "A portrait of Greg, a young man with roots in Syria, who returns to Greece and finds refuge in his relationship with a mountain."] } }
+          page: { text: ["40 min\nGreece\nEnglish / Arabic", "A portrait of Greg, a young man with roots in Syria, who returns to Greece and finds refuge in his relationship with a mountain."] } }
       ]
     },
     {
@@ -155,6 +158,11 @@ const SITE = {
       items: [
         { title: "Josiah Konder, demos & voice memos", year: "2022",
           page: {
+            credits: [
+              "Recorded in Athens & Copenhagen",
+              "Produced by Julius Ernst",
+              "Mastered by Albert A. Hertz"
+            ],
             links: [
               { label: "Spotify", url: "https://open.spotify.com/album/28r3EesxIz8rpT2TBJYzqh" },
               { label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/demos-voice-memos" }
@@ -163,7 +171,13 @@ const SITE = {
           } },
         { title: "Josiah Konder, Through the Stutter", year: "2019",
           page: {
-            credits: ["Third Coming Records"],
+            credits: [
+              "Recorded at Rhythmic Music Conservatory, Studio B",
+              "Engineered by Tanja Vesterbye Jessen",
+              "Mixed by Jens \"Benz\" Søndergaard at Jens Benz Studio",
+              "Mastered by Joel Krozer at Six Bit Deep",
+              "Cover photograph by Ed Gumuchian"
+            ],
             links: [
               { label: "Spotify", url: "https://open.spotify.com/album/6KHThGw0UB8KLXFbtOFRxn" },
               { label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/through-the-stutter-lp" }
@@ -172,11 +186,22 @@ const SITE = {
           } },
         { title: "Josiah Konder, Songs for the Stunned", year: "2018",
           page: {
+            credits: [
+              "Recorded at The Royal Danish Academy of Music",
+              "Engineered by Sam Bower",
+              "Mixed & mastered by Boris Wilsdorf at andereBaustelle Ton Studio",
+              "Cover photograph by Christopher Anderson"
+            ],
             links: [{ label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/songs-for-the-stunned-lp" }],
             physical: [{ label: "Vinyl", url: "" }]
           } },
         { title: "J.E. Useless, Three Stages of Creative Death", year: "2014",
           page: {
+            credits: [
+              "Recorded on a TASCAM 488",
+              "Engineered & mixed by Julius Ernst & Anton Funck",
+              "Mastered by Peter Peter"
+            ],
             links: [{ label: "Bandcamp", url: "https://jemusic.bandcamp.com/album/three-stages-of-creative-death" }],
             physical: [{ label: "Vinyl (Discogs)", url: "https://www.discogs.com/release/7019306-JE-Useless-Three-Stages-of-Creative-Death" }]
           } },
@@ -233,10 +258,17 @@ function archive() {
     `<nav class="nav"><a href="#" class="back">/</a></nav>`;
 }
 
+/* a work page opens like a label next to a piece of art:
+   title, year and the facts (format, place, language or credits) as one tight block */
 function detail(it) {
-  return     `<section><h2>${esc(it.title)}</h2><span>${esc(it.year || "")}</span></section>` +
-    blocks(it.page) +
-    `<nav class="nav"><a href="#" class="back">/</a></nav>`;
+  const p = Object.assign({}, it.page);
+  let facts = [];
+  if (p.credits && p.credits.length) { facts = p.credits; p.credits = []; }
+  else if (p.text && p.text.length && p.text[0].includes("\n")) { facts = p.text[0].split("\n"); p.text = p.text.slice(1); }
+  const label = `<section class="label"><h2>${esc(it.title)}</h2>` +
+    (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") +
+    facts.map(f => `<div>${esc(f)}</div>`).join("") + `</section>`;
+  return label + blocks(p) + `<nav class="nav"><a href="#" class="back">/</a></nav>`;
 }
 
 const logo = (src) => src ? `<a href="#" aria-label="${esc(SITE.name)}"><img class="logo" src="${esc(src)}" alt=""></a>` : "";
