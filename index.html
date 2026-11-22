@@ -72,6 +72,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .label { display: grid; gap: 0; justify-items: start; }
 .label h2 { margin-bottom: 0; }
 .label .yr { margin-bottom: 1em; }
+.label .about { margin: 0 0 1em; max-width: 46ch; }
 .text p { margin: 0 0 1em; max-width: 46ch; white-space: pre-line; }
 .text p:last-child { margin-bottom: 0; }
 .imgs { display: grid; gap: 12px; }
@@ -103,6 +104,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
    - "Previous work" items: "url" links straight out, "page" gives the item
      its own page (text, credits, digital links, physical, images).
    - Leave a url as "" to show the line in grey until it exists.
+   - cover: "images/....jpg" (or a link) shows a square cover at the top of a work page.
    - Films: put the most relevant page (IMDb, festival, Vimeo) in "links".
      linksTitle: "" shows the links without a heading.
    ============================================================ */
@@ -158,6 +160,7 @@ const SITE = {
       items: [
         { title: "Josiah Konder, demos & voice memos", year: "2022",
           page: {
+            cover: "images/demos.jpg",
             credits: [
               "Recorded in Athens & Copenhagen",
               "Produced by Julius Ernst",
@@ -171,12 +174,15 @@ const SITE = {
           } },
         { title: "Josiah Konder, Through the Stutter", year: "2019",
           page: {
+            cover: "images/through.jpg",
             credits: [
               "Recorded at Rhythmic Music Conservatory, Studio B",
               "Engineered by Tanja Vesterbye Jessen",
               "Mixed by Jens \"Benz\" Søndergaard at Jens Benz Studio",
               "Mastered by Joel Krozer at Six Bit Deep",
-              "Cover photograph by Ed Gumuchian"
+              "Cover photograph by Ed Gumuchian",
+              "\u00a0",
+              "Third Coming Records"
             ],
             links: [
               { label: "Spotify", url: "https://open.spotify.com/album/6KHThGw0UB8KLXFbtOFRxn" },
@@ -186,11 +192,14 @@ const SITE = {
           } },
         { title: "Josiah Konder, Songs for the Stunned", year: "2018",
           page: {
+            cover: "images/songs.jpg",
             credits: [
               "Recorded at The Royal Danish Academy of Music",
               "Engineered by Sam Bower",
               "Mixed & mastered by Boris Wilsdorf at andereBaustelle Ton Studio",
-              "Cover photograph by Christopher Anderson"
+              "Cover photograph by Christopher Anderson",
+              "\u00a0",
+              "Third Coming Records"
             ],
             links: [{ label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/songs-for-the-stunned-lp" }],
             physical: [{ label: "Vinyl", url: "" }]
@@ -200,7 +209,9 @@ const SITE = {
             credits: [
               "Recorded on a TASCAM 488",
               "Engineered & mixed by Julius Ernst & Anton Funck",
-              "Mastered by Peter Peter"
+              "Mastered by Peter Peter",
+              "\u00a0",
+              "Mythomania Col."
             ],
             links: [{ label: "Bandcamp", url: "https://jemusic.bandcamp.com/album/three-stages-of-creative-death" }],
             physical: [{ label: "Vinyl (Discogs)", url: "https://www.discogs.com/release/7019306-JE-Useless-Three-Stages-of-Creative-Death" }]
@@ -262,13 +273,18 @@ function archive() {
    title, year and the facts (format, place, language or credits) as one tight block */
 function detail(it) {
   const p = Object.assign({}, it.page);
-  let facts = [];
+  let facts = [], about = [];
   if (p.credits && p.credits.length) { facts = p.credits; p.credits = []; }
-  else if (p.text && p.text.length && p.text[0].includes("\n")) { facts = p.text[0].split("\n"); p.text = p.text.slice(1); }
+  else if (p.text && p.text.length && p.text[0].includes("\n")) {
+    /* films: description first, then the technical lines */
+    facts = p.text[0].split("\n"); about = p.text.slice(1); p.text = [];
+  }
   const label = `<section class="label"><h2>${esc(it.title)}</h2>` +
     (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") +
+    about.map(t => `<p class="about">${esc(t)}</p>`).join("") +
     facts.map(f => `<div>${esc(f)}</div>`).join("") + `</section>`;
-  return label + blocks(p) + `<nav class="nav"><a href="#" class="back">/</a></nav>`;
+  const cover = p.cover ? `<img class="logo" src="${esc(p.cover)}" alt="">` : "";
+  return cover + label + blocks(p) + `<nav class="nav"><a href="#" class="back">/</a></nav>`;
 }
 
 const logo = (src) => src ? `<a href="#" aria-label="${esc(SITE.name)}"><img class="logo" src="${esc(src)}" alt=""></a>` : "";
