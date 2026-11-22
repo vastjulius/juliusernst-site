@@ -1,0 +1,56 @@
+@font-face { font-family: "Bai Jamjuree"; src: url("/fonts/bai-jamjuree-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Bai Jamjuree"; src: url("/fonts/bai-jamjuree-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+:root {
+  /* layout idea: a release sheet in the top left corner, left-aligned with a ragged right edge */
+  --paper: #f0f0f0;
+  --ink: #000000;
+  --muted: #9a9a9a;
+  --font-body: "Bai Jamjuree", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--paper); color: var(--ink); }
+body {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.3;
+  padding: 9vh 3.3vw 80px 5.5vw;
+  -webkit-font-smoothing: antialiased;
+}
+main { display: grid; gap: 30px; justify-items: start; }
+a { color: var(--ink); text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: none; }
+a:focus-visible { outline: 1px dotted var(--ink); outline-offset: 2px; }
+h1, h2 { font-size: 12px; font-weight: 600; margin: 0; }
+section { display: grid; gap: 10px; justify-items: start; }
+ol, ul { list-style: none; margin: 0; padding: 0; }
+/* a tab stop, not a box: the value sits after the title, the right edge stays ragged */
+.rows li { display: grid; grid-template-columns: 23em auto; column-gap: 1.5em; }
+.rows .y { font-variant-numeric: tabular-nums; }
+/* tracklist: times sit a fixed gap after the longest title */
+.tracks { display: grid; grid-template-columns: max-content max-content; column-gap: 3em; }
+.tracks li { display: contents; }
+.muted { color: var(--muted); }
+.lines { display: grid; gap: 0; }
+.label { display: grid; gap: 0; justify-items: start; }
+.label h2 { margin-bottom: 0; }
+.label .yr { margin-bottom: 1em; }
+.label .about { margin: 0 0 1em; max-width: 46ch; }
+.text p { margin: 0 0 1em; max-width: 46ch; white-space: pre-line; }
+.text p:last-child { margin-bottom: 0; }
+.bio { margin-top: 40px; }
+.part { margin-top: 40px; }
+.imgs { display: grid; gap: 12px; }
+.imgs { margin-bottom: 12px; }
+.imgs img { margin-bottom: 0; }
+.nav { display: flex; gap: 1.5em; margin-top: 16px; }
+.home { position: fixed; bottom: 4vh; right: 3.3vw; display: block; line-height: 0; }
+.home img { width: 60px; height: auto; display: block; }
+.logo { display: block; width: 300px; max-width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; margin-bottom: 12px; }
+@media (max-width: 420px) {
+  body { font-size: 14px; padding: 40px 20px 64px 28px; }
+  h1, h2 { font-size: 14px; }
+  main { gap: 28px; }
+  .rows li { grid-template-columns: minmax(0, 1fr) auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
