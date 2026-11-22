@@ -49,22 +49,22 @@ const SITE = {
 
   archive: [
     {
-      title: "Films",
+      title: "Film",
       items: [
         { title: "All Things Pass and Will Pass Again / Aiuto", year: "2025", slug: "all-things-pass-and-will-pass-again",
-          page: { text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
+          page: { text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nDirected by Julius Ernst\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
                   info: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }],
                   links: [
                     { label: "Ekko", url: "https://www.ekkofilm.dk/awards/2026/bedste-dokumentar/all-things-pass-and-will-pass-again/" }
                   ] } },
         { title: "Territorie", year: "2024",
-          page: { text: ["DCP, 32 min\nDenmark\nDanish", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
+          page: { text: ["DCP, 32 min\nDenmark\nDanish\nDirected by Julius Ernst", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
         { title: "Untitled", year: "2023",
-          page: { text: ["DCP, 15 min\nDenmark\nFarsi / Danish", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
+          page: { text: ["DCP, 15 min\nDenmark\nFarsi / Danish\nDirected by Julius Ernst", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
                   linksTitle: "",
                   links: [{ label: "FAMUFEST", url: "https://famufest.cz/films/film/untitled" }] } },
         { title: "Gregoris Mountain", year: "2021",
-          page: { text: ["40 min\nGreece\nEnglish / Arabic", "A portrait of Greg, a young man with roots in Syria, who returns to Greece and finds refuge in his relationship with a mountain."] } }
+          page: { text: ["40 min\nGreece\nEnglish / Arabic\nDirected by Julius Ernst", "A portrait of Greg, a young man with roots in Syria, who returns to Greece and finds refuge in his relationship with a mountain."] } }
       ]
     },
     {
