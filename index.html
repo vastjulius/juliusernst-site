@@ -76,6 +76,7 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .text p { margin: 0 0 1em; max-width: 46ch; white-space: pre-line; }
 .text p:last-child { margin-bottom: 0; }
 .bio { margin-top: 40px; }
+.part { margin-top: 40px; }
 .imgs { display: grid; gap: 12px; }
 .imgs { margin-bottom: 12px; }
 .imgs img { margin-bottom: 0; }
@@ -101,17 +102,24 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
    EDIT HERE. Everything on the site comes from this block.
    - "release" is the front page: the newest thing.
      When a new release comes out, move the old one into
-     Previous work > Music as an item, and fill "release" with the new one.
-   - "Previous work" items: "url" links straight out, "page" gives the item
+     Other work > Music as an item, and fill "release" with the new one.
+   - "Other work" items: "url" links straight out, "page" gives the item
      its own page (text, credits, digital links, physical, images).
    - Leave a url as "" to show the line in grey until it exists.
+   - info: links shown as the last lines of the label (e.g. IMDb).
    - Films: put the most relevant page (IMDb, festival, Vimeo) in "links".
      linksTitle: "" shows the links without a heading.
    ============================================================ */
 const SITE = {
   name: "Julius Ernst",
   logo: "images/logo.jpg",
-  previousLogo: "images/previous-work.jpg",
+
+  /* FRONT PAGE, top to bottom:
+     1. "release": the newest music release
+     2. "otherReleases": earlier music under Julius Ernst (exact titles from Other work)
+     3. "films": an optional Film section, each film shown in full (empty = no section) */
+  otherReleases: [],
+  films: [],
 
   release: {
     title: "[Single title]",
@@ -143,8 +151,10 @@ const SITE = {
       items: [
         { title: "All Things Pass and Will Pass Again / Aiuto", year: "2025",
           page: { text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
-                  linksTitle: "",
-                  links: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }] } },
+                  info: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }],
+                  links: [
+                    { label: "Ekko", url: "https://www.ekkofilm.dk/awards/2026/bedste-dokumentar/all-things-pass-and-will-pass-again/" }
+                  ] } },
         { title: "Territorie", year: "2024",
           page: { text: ["DCP, 32 min\nDenmark\nDanish", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
         { title: "Untitled", year: "2023",
@@ -254,13 +264,26 @@ function blocks(p) {
   return out;
 }
 
+function others() {
+  const list = (SITE.otherReleases || []).map(t => items.find(x => x.title === t)).filter(Boolean);
+  if (!list.length) return "";
+  return `<section><h2>Releases</h2><ol class="rows">${list.map((it, i) =>
+    `<li><span>${i + 1}. ${titleCell(it)}</span><span class="y">${esc(it.year || "")}</span></li>`).join("")}</ol></section>`;
+}
+
+function filmsSection() {
+  const list = (SITE.films || []).map(t => items.find(x => x.title === t && x.page)).filter(Boolean);
+  if (!list.length) return "";
+  return `<section class="part"><h2>Film</h2></section>` + list.map(work).join("");
+}
+
 function home() {
   const r = SITE.release;
   const tracks = `<ol class="tracks">${r.tracks.map((t, i) =>
     `<li><span>${i + 1}. ${esc(t.title)}</span><span class="y">${esc(t.length)}</span></li>`).join("")}</ol>`;
-  return `<section><h1>${esc(SITE.name)} – ${esc(r.title)}</h1><span>${esc(r.date)}</span></section>` +
-    `<section>${tracks}</section>` + blocks(r) +
-    `<nav class="nav"><a href="#previous-work">Previous work</a></nav>`;
+  return `<section class="label"><h1>${esc(SITE.name)} – ${esc(r.title)}</h1><div>${esc(r.date)}</div></section>` +
+    `<section>${tracks}</section>` + blocks(r) + others() + filmsSection() +
+    `<nav class="nav"><a href="#other-work">Other work</a></nav>`;
 }
 
 function archive() {
@@ -274,7 +297,7 @@ function archive() {
 
 /* a work page opens like a label next to a piece of art:
    title, year and the facts (format, place, language or credits) as one tight block */
-function detail(it) {
+function work(it) {
   const p = Object.assign({}, it.page);
   let facts = [], about = [];
   if (p.credits && p.credits.length) { facts = p.credits; p.credits = []; }
@@ -285,8 +308,12 @@ function detail(it) {
   const label = `<section class="label"><h2>${esc(it.title)}</h2>` +
     (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") +
     about.map(t => `<p class="about">${esc(t)}</p>`).join("") +
-    facts.map(f => `<div>${esc(f)}</div>`).join("") + `</section>`;
-  return label + blocks(p) + `<nav class="nav"><a href="#" class="back">/</a></nav>`;
+    facts.map(f => `<div>${esc(f)}</div>`).join("") +
+    (p.info || []).map(l => `<div><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></div>`).join("") + `</section>`;
+  return label + blocks(p);
+}
+function detail(it) {
+  return work(it) + `<nav class="nav"><a href="#" class="back">/</a></nav>`;
 }
 
 const logo = (src) => src ? `<a href="#" aria-label="${esc(SITE.name)}"><img class="logo" src="${esc(src)}" alt=""></a>` : "";
@@ -294,7 +321,7 @@ const logo = (src) => src ? `<a href="#" aria-label="${esc(SITE.name)}"><img cla
 function render() {
   const h = location.hash.replace("#", "");
   const it = h && items.find(x => x.page && slug(x.title) === h);
-  if (h === "previous-work") { app.innerHTML = archive(); document.title = `Previous work – ${SITE.name}`; }
+  if (h === "other-work" || h === "previous-work") { app.innerHTML = archive(); document.title = `Other work – ${SITE.name}`; }
   else if (it) { app.innerHTML = detail(it); document.title = `${it.title} – ${SITE.name}`; }
   else { app.innerHTML = home(); document.title = SITE.name; }
   window.scrollTo(0, 0);
