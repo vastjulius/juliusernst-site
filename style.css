@@ -1,19 +1,21 @@
-@font-face { font-family: "Bai Jamjuree"; src: url("/fonts/bai-jamjuree-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Bai Jamjuree"; src: url("/fonts/bai-jamjuree-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "IM Fell English"; src: url("/fonts/im-fell-english-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 :root {
   /* layout idea: a release sheet in the top left corner, left-aligned with a ragged right edge */
-  --paper: #f0f0f0;
-  --ink: #000000;
-  --muted: #9a9a9a;
-  --font-body: "Bai Jamjuree", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color-scheme: light;
+  --paper: #7a1020;   /* red */
+  --ink: #e3bba4;     /* peach text */
+  --muted: #b17f78;   /* links not live yet */
+  --font-body: "IM Fell English", Georgia, serif;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--paper); color: var(--ink); }
+html { background: var(--paper); }
+html, body { margin: 0; color: var(--ink); }
 body {
   font-family: var(--font-body);
-  font-size: 12px;
-  line-height: 1.3;
+  font-size: 15px;
+  line-height: 1.32;
+  letter-spacing: .005em;
+  text-transform: lowercase;  /* no capitals anywhere */
   padding: 9vh 3.3vw 80px 5.5vw;
   -webkit-font-smoothing: antialiased;
 }
@@ -21,7 +23,7 @@ main { display: grid; gap: 30px; justify-items: start; }
 a { color: var(--ink); text-decoration: none; }
 a:hover, a:focus-visible { text-decoration: none; }
 a:focus-visible { outline: 1px dotted var(--ink); outline-offset: 2px; }
-h1, h2 { font-size: 12px; font-weight: 600; margin: 0; }
+h1, h2 { font-size: 16px; font-weight: 400; letter-spacing: .02em; margin: 0; }
 section { display: grid; gap: 10px; justify-items: start; }
 ol, ul { list-style: none; margin: 0; padding: 0; }
 /* a tab stop, not a box: the value sits after the title, the right edge stays ragged */
@@ -48,9 +50,34 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 .home img { width: 60px; height: auto; display: block; }
 .logo { display: block; width: 300px; max-width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; margin-bottom: 12px; }
 @media (max-width: 420px) {
-  body { font-size: 14px; padding: 40px 20px 64px 28px; }
-  h1, h2 { font-size: 14px; }
+  body { font-size: 15px; padding: 40px 20px 64px 28px; }
+  h1, h2 { font-size: 16px; }
   main { gap: 28px; }
   .rows li { grid-template-columns: minmax(0, 1fr) auto; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* the outer layer: mythomania collection, top of every page */
+.mm { margin-bottom: 30px; }
+.mm a { font-size: 21px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: .42em; }
+/* small mark before the name, about the height of the letters, in the text colour */
+.mm-mark {
+  display: inline-block; width: 1.08em; height: 1.04em; flex: none; position: relative; top: .02em;
+  background: var(--ink);
+  -webkit-mask: url("/images/mark-small.png") center / contain no-repeat;
+          mask: url("/images/mark-small.png") center / contain no-repeat;
+}
+
+/* the mythomania mark, very large in the middle, in the text colour */
+.mark {
+  position: fixed; z-index: 0; pointer-events: none;
+  /* huge: the screen sits inside the circle, centred on its middle */
+  height: 165vmax; height: calc(1.22 * hypot(100vw, 100vh));
+  aspect-ratio: 1054 / 1012; width: auto;
+  left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
+  background: var(--ink); opacity: .32;
+  -webkit-mask: url("/images/mark.png") center / 100% 100% no-repeat;
+          mask: url("/images/mark.png") center / 100% 100% no-repeat;
+}
+main, .mm, .home { position: relative; z-index: 1; }
+.home { position: fixed; }

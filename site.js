@@ -4,7 +4,7 @@
      When a new release comes out, move the old one into
      Other work > Music as an item, and fill "release" with the new one.
    - "Other work" items: "url" links straight out, "page" gives the item
-     its own page at juliusernst.com/<address>/ (text, credits, links, physical).
+     its own page at mythomaniacollection.com/<address>/ (text, credits, links, physical).
      The address is the title in small letters with dashes, unless "slug" says otherwise.
      NEW WORK WITH A PAGE: also make its folder on GitHub. Add file > Create new file,
      name it <address>/index.html and paste the contents of territorie/index.html.
@@ -15,6 +15,7 @@
    ============================================================ */
 const SITE = {
   name: "Julius Ernst",
+  label: "Mythomania Collection",
 
   /* FRONT PAGE, top to bottom:
      1. "release": the newest music release
@@ -219,11 +220,11 @@ const detail = it => work(it) + `<nav class="nav"><a href="/" class="back">/</a>
 function setCanonical(path) {
   let l = document.querySelector('link[rel="canonical"]');
   if (!l) { l = document.createElement("link"); l.rel = "canonical"; document.head.appendChild(l); }
-  l.href = "https://juliusernst.com" + path;
+  l.href = "https://mythomaniacollection.com" + path;
 }
 
 function render() {
-  /* old #links (juliusernst.com/#territorie) move to the clean address */
+  /* old #links (mythomaniacollection.com/#territorie) move to the clean address */
   const h = location.hash.replace("#", "");
   if (h === "other-work" || h === "previous-work") { location.replace("/other-work/"); return; }
   if (h && findWork(h)) { location.replace("/" + pathOf(findWork(h)) + "/"); return; }
@@ -248,3 +249,5 @@ document.addEventListener("click", e => {
   }
 });
 render();
+document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div>`);
+app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);

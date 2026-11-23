@@ -1,4 +1,4 @@
-# juliusernst.com
+# mythomaniacollection.com
 
 - site.js: all content (the block marked EDIT HERE) and the code. Edit text here.
 - style.css: colours, sizes, spacing.
