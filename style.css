@@ -68,16 +68,25 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
           mask: url("/images/mark-small.png") center / contain no-repeat;
 }
 
-/* the mythomania mark, very large in the middle, in the text colour */
+/* the mythomania mark: huge and smeared, centred, in the text colour */
 .mark {
   position: fixed; z-index: 0; pointer-events: none;
-  /* huge: the screen sits inside the circle, centred on its middle */
   height: 165vmax; height: calc(1.22 * hypot(100vw, 100vh));
   aspect-ratio: 1054 / 1012; width: auto;
   left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
   background: var(--ink); opacity: .32;
-  -webkit-mask: url("/images/mark.png") center / 100% 100% no-repeat;
-          mask: url("/images/mark.png") center / 100% 100% no-repeat;
+  -webkit-mask: url("/images/mark.png?v=6") center / 100% 100% no-repeat;
+          mask: url("/images/mark.png?v=6") center / 100% 100% no-repeat;
 }
 main, .mm, .home { position: relative; z-index: 1; }
 .home { position: fixed; }
+
+/* the tower: blocks piled on the corner picture, leaning as if they could fall */
+.home img { box-shadow: 0 2px 3px rgba(0,0,0,.35); }
+.home img:nth-child(1) { transform: translate(-5px, -4px) rotate(-4.5deg); margin-bottom: -3px; }
+.home img:nth-child(2) { transform: translateX(3px) rotate(4deg); margin-bottom: -2px; }
+.home img:nth-child(3) { transform: rotate(-1deg); }
+.home img:nth-child(-n+2) { transform-origin: 50% 100%; }
+/* hover the tower: the blocks straighten up */
+.home img { transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.home:hover img, .home:focus-visible img { transform: none; }

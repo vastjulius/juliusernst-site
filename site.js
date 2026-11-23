@@ -250,4 +250,12 @@ document.addEventListener("click", e => {
 });
 render();
 document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div>`);
+/* the small tower of pictures standing on the corner picture (top to bottom) */
+(function () {
+  const home = document.querySelector("a.home");
+  if (!home) return;
+  const tiles = ["stack-1", "stack-3"]
+    .map(t => `<img src="/images/${t}.jpg?v=2" alt="">`).join("");
+  home.insertAdjacentHTML("afterbegin", tiles);
+})();
 app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);
