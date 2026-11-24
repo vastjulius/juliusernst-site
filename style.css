@@ -111,6 +111,7 @@ main, .mm { text-shadow: .6px 0 rgba(255,60,60,.35), -.6px 0 rgba(80,200,255,.22
 @media (prefers-reduced-motion: reduce) { .crt, .crt::after { animation: none; } }
 /* the tower sits above the page content so it can always be hovered and clicked */
 .home { z-index: 4; }
-/* the bulge of the old screen: everything sits on one screen layer that bends slightly outward */
-html, body { height: 100%; overflow: hidden; }
-#screen { position: fixed; inset: 0; overflow-y: auto; padding: inherit; filter: url(#bend); }
+/* hover: the pieces snap so the tan right-hand pillar lines up straight through the whole tower */
+.home:hover img:nth-child(1), .home:focus-visible img:nth-child(1) { transform: translateX(2.25px); }   /* tower-2 */
+.home:hover img:nth-child(2), .home:focus-visible img:nth-child(2) { transform: translateX(-4.5px); }   /* tower-1 */
+.home:hover img:nth-child(3), .home:focus-visible img:nth-child(3) { transform: none; }                 /* the original */
