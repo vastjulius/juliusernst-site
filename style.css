@@ -68,25 +68,23 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
           mask: url("/images/mark-small.png") center / contain no-repeat;
 }
 
-/* the mythomania mark: huge and smeared, centred, in the text colour */
+/* the mythomania mark, tiny and repeated so it becomes a grainy printed texture over the whole background */
 .mark {
-  position: fixed; z-index: 0; pointer-events: none;
-  height: 165vmax; height: calc(1.22 * hypot(100vw, 100vh));
-  aspect-ratio: 1054 / 1012; width: auto;
-  left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
-  background: var(--ink); opacity: .32;
-  -webkit-mask: url("/images/mark.png?v=6") center / 100% 100% no-repeat;
-          mask: url("/images/mark.png?v=6") center / 100% 100% no-repeat;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--ink); opacity: .22;
+  -webkit-mask: url("/images/mark-tile.png?v=2") 0 0 / 512px 512px repeat;
+          mask: url("/images/mark-tile.png?v=2") 0 0 / 512px 512px repeat;
 }
 main, .mm, .home { position: relative; z-index: 1; }
 .home { position: fixed; }
 
-/* the tower: blocks piled on the corner picture, leaning as if they could fall */
-.home img { box-shadow: 0 2px 3px rgba(0,0,0,.35); }
-.home img:nth-child(1) { transform: translate(-5px, -4px) rotate(-4.5deg); margin-bottom: -3px; }
-.home img:nth-child(2) { transform: translateX(3px) rotate(4deg); margin-bottom: -2px; }
-.home img:nth-child(3) { transform: rotate(-1deg); }
-.home img:nth-child(-n+2) { transform-origin: 50% 100%; }
-/* hover the tower: the blocks straighten up */
-.home img { transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+/* the tower: six pieces of the corner picture stacked into one structure */
+.home img + img { margin-top: 0; }
+/* each piece sits a little off, so they only roughly fit together */
+.home img:nth-child(1) { transform: translateX(3px) rotate(1.4deg); margin-bottom: -2px; }
+.home img:nth-child(2) { transform: translateX(-2px) rotate(-.8deg); margin-bottom: -1px; }
+.home img:nth-child(3) { transform: translateX(4px) rotate(.6deg); margin-bottom: -2px; }
+.home img:nth-child(4) { transform: translateX(-3px) rotate(-1.2deg); margin-bottom: -1px; }
+.home img:nth-child(5) { transform: translateX(1px) rotate(.9deg); margin-bottom: -2px; }
+/* hover: everything snaps straight at once */
 .home:hover img, .home:focus-visible img { transform: none; }
