@@ -92,23 +92,14 @@ main, .mm, .home { position: relative; z-index: 1; }
 /* hover: everything snaps straight at once */
 .home:hover img, .home:focus-visible img { transform: none; }
 
-/* old tv screen: fine scanlines, a soft dark edge, a faint colour fringe and a slow flicker */
+/* old tv screen: fine scanlines, a soft dark edge and a faint colour fringe (still, no animation) */
 .crt {
   position: fixed; inset: 0; z-index: 5; pointer-events: none;
   background:
     repeating-linear-gradient(to bottom, rgba(0,0,0,.16) 0, rgba(0,0,0,.16) 1px, transparent 1px, transparent 3px),
     radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.34) 100%);
-  animation: crt-flicker 6s infinite steps(1);
-}
-.crt::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,.035) 50%, transparent 100%);
-  background-size: 100% 260px; animation: crt-roll 9s linear infinite;
 }
 main, .mm { text-shadow: .6px 0 rgba(255,60,60,.35), -.6px 0 rgba(80,200,255,.22); }
-@keyframes crt-flicker { 0%,100% { opacity: 1; } 47% { opacity: .93; } 48% { opacity: 1; } 81% { opacity: .96; } 82% { opacity: 1; } }
-@keyframes crt-roll { from { background-position: 0 -260px; } to { background-position: 0 100vh; } }
-@media (prefers-reduced-motion: reduce) { .crt, .crt::after { animation: none; } }
 /* the tower sits above the page content so it can always be hovered and clicked */
 .home { z-index: 4; }
 /* hover: the pieces snap so the tan right-hand pillar lines up straight through the whole tower */
