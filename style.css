@@ -68,12 +68,20 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
           mask: url("/images/mark-small.png") center / contain no-repeat;
 }
 
-/* the mythomania mark, tiny and repeated so it becomes a grainy printed texture over the whole background */
+/* background: the smeared mark, huge and centred, softened into a glow that almost falls into the red */
 .mark {
+  position: fixed; z-index: 0; pointer-events: none;
+  height: 165vmax; height: calc(1.22 * hypot(100vw, 100vh));
+  aspect-ratio: 1054 / 1012; width: auto;
+  left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
+  background: #a8323e;
+  -webkit-mask: url("/images/mark-glow.png?v=2") center / 100% 100% no-repeat;
+          mask: url("/images/mark-glow.png?v=2") center / 100% 100% no-repeat;
+}
+/* film grain over the whole page */
+.grain {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: var(--ink); opacity: .22;
-  -webkit-mask: url("/images/mark-tile.png?v=2") 0 0 / 512px 512px repeat;
-          mask: url("/images/mark-tile.png?v=2") 0 0 / 512px 512px repeat;
+  background: url("/images/grain.png?v=2") 0 0 / 128px 128px repeat;
 }
 main, .mm, .home { position: relative; z-index: 1; }
 .home { position: fixed; }

@@ -249,12 +249,12 @@ document.addEventListener("click", e => {
   }
 });
 render();
-document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div>`);
+document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>`);
 /* the tower: five more pieces of the corner picture stacked on top of it (top to bottom) */
 (function () {
   const home = document.querySelector("a.home");
   if (!home) return;
-  const tiles = ["tower-5", "tower-4", "tower-3", "tower-2", "tower-1"]
+  const tiles = ["tower-2", "tower-1"]
     .map(t => `<img src="/images/${t}.jpg?v=6" alt="">`).join("");
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
