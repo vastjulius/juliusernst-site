@@ -249,7 +249,7 @@ document.addEventListener("click", e => {
   }
 });
 render();
-document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>`);
+document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div>`);
 /* the tower: five more pieces of the corner picture stacked on top of it (top to bottom) */
 (function () {
   const home = document.querySelector("a.home");
