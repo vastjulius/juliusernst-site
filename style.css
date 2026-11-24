@@ -75,8 +75,8 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   aspect-ratio: 1054 / 1012; width: auto;
   left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
   background: #b03a44; opacity: .55;
-  -webkit-mask: url("/images/mark.png?v=11") center / 100% 100% no-repeat;
-          mask: url("/images/mark.png?v=11") center / 100% 100% no-repeat;
+  -webkit-mask: url("/images/mark.png?v=13") center / 100% 100% no-repeat;
+          mask: url("/images/mark.png?v=13") center / 100% 100% no-repeat;
 }
 main, .mm, .home { position: relative; z-index: 1; }
 .home { position: fixed; }
@@ -92,39 +92,24 @@ main, .mm, .home { position: relative; z-index: 1; }
 /* hover: everything snaps straight at once */
 .home:hover img, .home:focus-visible img { transform: none; }
 
-/* old tv screen: fine scanlines, a soft dark edge, a faint colour fringe and a slow flicker */
+/* old tv screen, static: curved scanlines and a rounded, pillow-shaped falloff, drawn once */
 .crt {
   position: fixed; inset: 0; z-index: 5; pointer-events: none;
   background:
-    repeating-linear-gradient(to bottom, rgba(0,0,0,.16) 0, rgba(0,0,0,.16) 1px, transparent 1px, transparent 3px),
-    radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.34) 100%);
-  animation: crt-flicker 6s infinite steps(1);
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.14) 0, rgba(0,0,0,.14) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse 60% 32% at 42% 22%, rgba(255,235,225,.07), transparent 70%),
+    url("/images/tube.png?v=4") center / 100% 100% no-repeat;
 }
-.crt::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,.035) 50%, transparent 100%);
-  background-size: 100% 260px; animation: crt-roll 9s linear infinite;
-}
-main, .mm { text-shadow: .6px 0 rgba(255,60,60,.35), -.6px 0 rgba(80,200,255,.22); }
-@keyframes crt-flicker { 0%,100% { opacity: 1; } 47% { opacity: .93; } 48% { opacity: 1; } 81% { opacity: .96; } 82% { opacity: 1; } }
-@keyframes crt-roll { from { background-position: 0 -260px; } to { background-position: 0 100vh; } }
-@media (prefers-reduced-motion: reduce) { .crt, .crt::after { animation: none; } }
-/* the tower sits above the page content so it can always be hovered and clicked */
-.home { z-index: 4; }
-/* the bulge of the old screen: everything sits on one screen layer that bends slightly outward */
+/* a faint colour fringe on the type, like an old tube */
+main, .mm { text-shadow: .5px 0 rgba(255,70,70,.28), -.5px 0 rgba(90,200,255,.18); }
+/* the tower sits above the text on the screen layer, under the scanlines and vignette */
+.home { z-index: 2; }
+
+/* the text sits on its own screen layer that bends with the tube.
+   only the text is on it (no background), so it stays light to redraw when scrolling */
 html, body { height: 100%; overflow: hidden; }
-/* the screen layer reaches a little past the window edges, so the bend pulls in red, not darkness */
-#screen { position: fixed; inset: -8vh -8vw; overflow-y: auto; padding: inherit; filter: url(#bend);
-  border: 8vh 8vw solid transparent; box-sizing: border-box;
-  scrollbar-width: none; background: var(--paper); }
+#screen { position: fixed; inset: 0; z-index: 3; overflow-y: auto; overscroll-behavior: contain;
+  padding: 9vh 3.3vw 80px 5.5vw; box-sizing: border-box; filter: url(#bend);
+  scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 #screen::-webkit-scrollbar { display: none; }
-html { background: var(--paper); }
-/* the background, scanlines and grain reach into the hidden overscan too, so no edge ever shows */
-.crt { inset: -8vh -8vw; }
-.crt { background:
-    repeating-linear-gradient(to bottom, rgba(0,0,0,.16) 0, rgba(0,0,0,.16) 1px, transparent 1px, transparent 3px),
-    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.18) 62%, rgba(0,0,0,.52) 88%); }
-/* the bulge pushes things near the edges outward, so the content starts a little further in */
-#screen > .mm, #screen > main { margin-left: 9vw; margin-right: 9vw; }
-#screen > .mm { margin-top: 8vh; }
-.home { right: calc(3.3vw + 10vw); bottom: calc(4vh + 11vh); }
+@media (max-width: 420px) { #screen { padding: 40px 20px 64px 28px; } }

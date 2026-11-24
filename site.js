@@ -195,7 +195,7 @@ function home() {
 function archive() {
   return SITE.archive.map(s => `<section><h2>${esc(s.title)}</h2>${rows(s.items)}</section>`).join("") +
     `<section class="text bio"><p>${esc(SITE.bio)}</p></section>` +
-    `<nav class="nav"><a href="/" class="back">/</a></nav>`;
+    `<nav class="nav"><a href="/" class="back" aria-label="Back">←</a></nav>`;
 }
 
 /* a work page opens like a label next to a piece of art:
@@ -215,7 +215,7 @@ function work(it) {
     (p.info || []).map(l => `<div><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></div>`).join("") + `</section>`;
   return label + blocks(p);
 }
-const detail = it => work(it) + `<nav class="nav"><a href="/" class="back">/</a></nav>`;
+const detail = it => work(it) + `<nav class="nav"><a href="/" class="back" aria-label="Back">←</a></nav>`;
 
 function setCanonical(path) {
   let l = document.querySelector('link[rel="canonical"]');
@@ -259,9 +259,10 @@ document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="t
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
 app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);
-/* move everything onto one screen layer, so the old-tv bend applies to the whole picture */
+/* put the text on the bending screen layer */
 (function () {
   const scr = document.createElement("div"); scr.id = "screen";
-  [...document.body.children].forEach(el => { if (el.tagName !== "SCRIPT" && el.tagName.toLowerCase() !== "svg") scr.appendChild(el); });
-  document.body.appendChild(scr);
+  const mm = document.querySelector(".mm"); const main = document.getElementById("app");
+  mm.parentNode.insertBefore(scr, mm); scr.appendChild(mm); scr.appendChild(main);
+  const home = document.querySelector("a.home"); if (home) scr.appendChild(home);   /* the tower bends with the screen too */
 })();
