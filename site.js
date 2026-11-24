@@ -249,7 +249,7 @@ document.addEventListener("click", e => {
   }
 });
 render();
-document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div>`);
+document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div><div class="crt" aria-hidden="true"></div>`);
 /* the tower: five more pieces of the corner picture stacked on top of it (top to bottom) */
 (function () {
   const home = document.querySelector("a.home");
@@ -259,3 +259,9 @@ document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="t
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
 app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);
+/* move everything onto one screen layer, so the old-tv bend applies to the whole picture */
+(function () {
+  const scr = document.createElement("div"); scr.id = "screen";
+  [...document.body.children].forEach(el => { if (el.tagName !== "SCRIPT" && el.tagName.toLowerCase() !== "svg") scr.appendChild(el); });
+  document.body.appendChild(scr);
+})();
