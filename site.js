@@ -259,10 +259,9 @@ document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="t
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
 app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);
-/* put the text on the bending screen layer */
+/* move everything onto one screen layer, so the old-tv bend applies to the whole picture */
 (function () {
   const scr = document.createElement("div"); scr.id = "screen";
-  const mm = document.querySelector(".mm"); const main = document.getElementById("app");
-  mm.parentNode.insertBefore(scr, mm); scr.appendChild(mm); scr.appendChild(main);
-  const home = document.querySelector("a.home"); if (home) scr.appendChild(home);   /* the tower bends with the screen too */
+  [...document.body.children].forEach(el => { if (el.tagName !== "SCRIPT" && el.tagName.toLowerCase() !== "svg") scr.appendChild(el); });
+  document.body.appendChild(scr);
 })();
