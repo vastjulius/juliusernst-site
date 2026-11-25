@@ -1,11 +1,11 @@
 @font-face { font-family: "IM Fell English"; src: url("/fonts/im-fell-english-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 :root {
   /* layout idea: a release sheet in the top left corner, left-aligned with a ragged right edge */
-  --paper: #7a1020;   /* red */
-  --ink: #e3bba4;     /* peach text */
-  --muted: #b17f78;   /* links not live yet */
+  --paper: #f0f0f0;   /* grey, from the first version */
+  --ink: #000000;     /* black text */
+  --muted: #9a9a9a;   /* links not live yet */
   --font-body: "IM Fell English", Georgia, serif;
-  color-scheme: dark;
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 html { background: var(--paper); }
@@ -60,9 +60,10 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 /* the outer layer: mythomania collection, top of every page */
 .mm { margin-bottom: 30px; }
 .mm a { font-size: 21px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: .42em; }
-/* small mark before the name, about the height of the letters, in the text colour */
-.mm-mark {
-  display: inline-block; width: 1.08em; height: 1.04em; flex: none; position: relative; top: .02em;
+/* small mark sitting on top of the tower in the corner, in the text colour */
+.home::before {
+  content: ""; position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%);
+  width: 26px; height: 25px; margin-bottom: 8px;
   background: var(--ink);
   -webkit-mask: url("/images/mark-small.png") center / contain no-repeat;
           mask: url("/images/mark-small.png") center / contain no-repeat;
@@ -74,9 +75,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
   height: 165vmax; height: calc(1.22 * hypot(100vw, 100vh));
   aspect-ratio: 1054 / 1012; width: auto;
   left: 50%; top: 50%; transform: translate(-47.96%, -52.33%);
-  background: #c9505a; opacity: .75;
-  -webkit-mask: url("/images/mark.png?v=17") center / 100% 100% no-repeat;
-          mask: url("/images/mark.png?v=17") center / 100% 100% no-repeat;
+  background: #000000; opacity: .07;
+  -webkit-mask: url("/images/mark.png?v=18") center / 100% 100% no-repeat;
+          mask: url("/images/mark.png?v=18") center / 100% 100% no-repeat;
 }
 main, .mm, .home { position: relative; z-index: 1; }
 .home { position: fixed; }
@@ -96,10 +97,10 @@ main, .mm, .home { position: relative; z-index: 1; }
 .crt {
   position: fixed; inset: 0; z-index: 5; pointer-events: none;
   background:
-    repeating-linear-gradient(to bottom, rgba(0,0,0,.16) 0, rgba(0,0,0,.16) 1px, transparent 1px, transparent 3px),
-    radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.34) 100%);
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.05) 0, rgba(0,0,0,.05) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.12) 100%);
 }
-main, .mm { text-shadow: .6px 0 rgba(255,60,60,.35), -.6px 0 rgba(80,200,255,.22); }
+main, .mm { text-shadow: .5px 0 rgba(255,0,0,.18), -.5px 0 rgba(0,120,255,.14); }
 /* the tower sits above the page content so it can always be hovered and clicked */
 .home { z-index: 4; }
 /* hover: the pieces snap so the tan right-hand pillar lines up straight through the whole tower */

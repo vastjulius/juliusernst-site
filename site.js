@@ -258,4 +258,4 @@ document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="t
     .map(t => `<img src="/images/${t}.jpg?v=6" alt="">`).join("");
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
-app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/"><span class="mm-mark" aria-hidden="true"></span>${esc(SITE.label || "Mythomania Collection")}</a></header>`);
+app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/">${esc(SITE.label || "Mythomania Collection")}</a></header>`);
