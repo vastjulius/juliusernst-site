@@ -53,13 +53,15 @@ const SITE = {
       title: "Film",
       items: [
         { title: "All Things Pass and Will Pass Again / Aiuto", year: "2025", slug: "all-things-pass-and-will-pass-again",
-          page: { text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nDirected by Julius Ernst\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
+          page: { images: [{ src: "/images/all-things-pass-1.jpg", pos: "50% 15%" }]   /* pos: which part of the still to keep */,
+                  text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nDirected by Julius Ernst\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
                   info: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }],
                   links: [
                     { label: "Ekko", url: "https://www.ekkofilm.dk/awards/2026/bedste-dokumentar/all-things-pass-and-will-pass-again/" }
                   ] } },
         { title: "Territorie", year: "2024",
-          page: { text: ["DCP, 32 min\nDenmark\nDanish\nDirected by Julius Ernst", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
+          page: { images: ["/images/territorie-1.jpg"],
+                  text: ["DCP, 32 min\nDenmark\nDanish / English\nDirected by Julius Ernst", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
         { title: "Untitled", year: "2023",
           page: { text: ["DCP, 15 min\nDenmark\nFarsi / Danish\nDirected by Julius Ernst", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
                   linksTitle: "",
@@ -87,6 +89,7 @@ const SITE = {
           } },
         { title: "Josiah Konder, Through the Stutter", year: "2019",
           page: {
+            images: ["/images/through.jpg"],
             credits: [
               "Recorded at Rhythmic Music Conservatory, Studio B",
               "Engineered by Tanja Vesterbye Jessen",
@@ -142,6 +145,8 @@ const SITE = {
 
 /* ---------- the site itself: no need to edit below ---------- */
 const app = document.getElementById("app");
+/* words that keep their capitals even though the site is lowercase */
+const caps = s => esc(s).replace(/\bDCP\b/g, '<span class="caps">DCP</span>');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const slug = s => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const items = SITE.archive.flatMap(s => s.items);
@@ -157,6 +162,12 @@ function titleCell(it) {
   if (it.url) return `<a href="${esc(it.url)}" rel="noopener">${esc(it.title)}</a>`;
   return `<span>${esc(it.title)}</span>`;
 }
+
+const pics = (p, film) => (p && p.images && p.images.length) ?
+  `<section class="imgs${film ? " film" : ""}">${p.images.map(im => typeof im === "string" ? im : im).map(im => {
+    const src = typeof im === "string" ? im : im.src, pos = typeof im === "string" ? "" : (im.pos || "");
+    return `<img src="${esc(src)}" alt="" loading="lazy"${pos ? ` style="object-position:${esc(pos)}"` : ""}>`;
+  }).join("")}</section>` : "";
 
 function blocks(p) {
   let out = "";
@@ -187,7 +198,7 @@ function home() {
   const r = SITE.release;
   const tracks = `<ol class="tracks">${r.tracks.map((t, i) =>
     `<li><span>${i + 1}. ${esc(t.title)}</span><span class="y">${esc(t.length)}</span></li>`).join("")}</ol>`;
-  return `<section class="label"><h1>${esc(SITE.name)} – ${esc(r.title)}</h1><div>${esc(r.date)}</div></section>` +
+  return pics(r) + `<section class="label"><h1>${esc(SITE.name)} – ${esc(r.title)}</h1><div>${esc(r.date)}</div></section>` +
     `<section>${tracks}</section>` + blocks(r) + others() + filmsSection() +
     `<nav class="nav"><a href="/other-work/">Other work</a></nav>`;
 }
@@ -195,7 +206,7 @@ function home() {
 function archive() {
   return SITE.archive.map(s => `<section><h2>${esc(s.title)}</h2>${rows(s.items)}</section>`).join("") +
     `<section class="text bio"><p>${esc(SITE.bio)}</p></section>` +
-    `<nav class="nav"><a href="/" class="back" aria-label="Back">←</a></nav>`;
+    `<nav class="nav"><a href="/" class="back" aria-label="Back"><span class="back-mark" aria-hidden="true"></span></a></nav>`;
 }
 
 /* a work page opens like a label next to a piece of art:
@@ -203,6 +214,8 @@ function archive() {
 function work(it) {
   const p = Object.assign({}, it.page);
   let facts = [], about = [];
+  const isFilm = !!(p.text && p.text.length && p.text[0].includes("\n"));
+  const pictures = pics(p, isFilm);
   if (p.credits && p.credits.length) { facts = p.credits; p.credits = []; }
   else if (p.text && p.text.length && p.text[0].includes("\n")) {
     /* films: description first, then the technical lines */
@@ -211,11 +224,11 @@ function work(it) {
   const label = `<section class="label"><h2>${esc(it.title)}</h2>` +
     (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") +
     about.map(t => `<p class="about">${esc(t)}</p>`).join("") +
-    facts.map(f => `<div>${esc(f)}</div>`).join("") +
+    facts.map(f => `<div>${caps(f)}</div>`).join("") +
     (p.info || []).map(l => `<div><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></div>`).join("") + `</section>`;
-  return label + blocks(p);
+  return pictures + label + blocks(p);
 }
-const detail = it => work(it) + `<nav class="nav"><a href="/" class="back" aria-label="Back">←</a></nav>`;
+const detail = it => work(it) + `<nav class="nav"><a href="/" class="back" aria-label="Back"><span class="back-mark" aria-hidden="true"></span></a></nav>`;
 
 function setCanonical(path) {
   let l = document.querySelector('link[rel="canonical"]');
@@ -234,6 +247,7 @@ function render() {
   if (key === "other-work" || key === "previous-work") {
     app.innerHTML = archive(); document.title = `Other work – ${SITE.name}`; setCanonical("/other-work/");
   } else if (it) {
+    document.body.classList.add("is-work");
     app.innerHTML = detail(it); document.title = `${it.title} – ${SITE.name}`; setCanonical("/" + pathOf(it) + "/");
   } else {
     app.innerHTML = home(); document.title = SITE.name; setCanonical("/");

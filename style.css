@@ -60,10 +60,9 @@ ol, ul { list-style: none; margin: 0; padding: 0; }
 /* the outer layer: mythomania collection, top of every page */
 .mm { margin-bottom: 30px; }
 .mm a { font-size: 21px; letter-spacing: .01em; display: inline-flex; align-items: center; gap: .42em; }
-/* small mark sitting on top of the tower in the corner, in the text colour */
-.home::before {
-  content: ""; position: absolute; left: 50%; bottom: 100%; transform: translateX(-50%);
-  width: 26px; height: 25px; margin-bottom: 8px;
+/* the small mark is the back button, in the text colour */
+.back-mark {
+  display: inline-block; width: 26px; height: 25px; vertical-align: middle;
   background: var(--ink);
   -webkit-mask: url("/images/mark-small.png") center / contain no-repeat;
           mask: url("/images/mark-small.png") center / contain no-repeat;
@@ -107,3 +106,25 @@ main, .mm { text-shadow: .5px 0 rgba(255,0,0,.18), -.5px 0 rgba(0,120,255,.14); 
 .home:hover img:nth-child(1), .home:focus-visible img:nth-child(1) { transform: translateX(2.25px); }   /* tower-2 */
 .home:hover img:nth-child(2), .home:focus-visible img:nth-child(2) { transform: translateX(-4.5px); }   /* tower-1 */
 .home:hover img:nth-child(3), .home:focus-visible img:nth-child(3) { transform: none; }                 /* the original */
+
+/* the tower in black and white, inverted */
+.home img { filter: grayscale(1) invert(1) contrast(1.35); }
+/* only the scaffolding: keep the left 53% of each piece, same height as before */
+.home img { width: 32px; height: 80px; object-fit: cover; object-position: left center; }
+/* at rest the squares stack straight; on hover they shift so the right pillar lines up */
+.home img:nth-child(n) { transform: none; margin-bottom: 0; }
+.home:hover img:nth-child(1), .home:focus-visible img:nth-child(1) { transform: translateX(2.75px); }
+.home:hover img:nth-child(2), .home:focus-visible img:nth-child(2) { transform: translateX(-4px); }
+.home:hover img:nth-child(3), .home:focus-visible img:nth-child(3) { transform: none; }
+
+/* pictures for the release, films and albums, above the title */
+.imgs img { width: 300px; max-width: 100%; height: auto; display: block; }
+/* film stills are 3:2, the same width as the album covers */
+.imgs.film img { width: 300px; aspect-ratio: 3 / 2; height: auto; object-fit: cover; }
+/* no label name on the single work pages */
+.is-work .mm { display: none; }
+/* title sits closer to the picture */
+.imgs { margin-bottom: -14px; }
+/* the back mark 10% smaller */
+.back-mark { width: 23.4px; height: 22.5px; }
+.caps { text-transform: none; }
