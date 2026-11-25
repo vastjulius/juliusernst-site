@@ -1,147 +1,10 @@
 /* ============================================================
-   EDIT HERE. Everything on the site comes from this block.
-   - "release" is the front page: the newest thing.
-     When a new release comes out, move the old one into
-     Other work > Music as an item, and fill "release" with the new one.
-   - "Other work" items: "url" links straight out, "page" gives the item
-     its own page at mythomaniacollection.com/<address>/ (text, credits, links, physical).
-     The address is the title in small letters with dashes, unless "slug" says otherwise.
-     NEW WORK WITH A PAGE: also make its folder on GitHub. Add file > Create new file,
-     name it <address>/index.html and paste the contents of territorie/index.html.
-   - Leave a url as "" to show the line in grey until it exists.
-   - info: links shown as the last lines of the label (e.g. IMDb).
-   - Films: put the most relevant page (IMDb, festival, Vimeo) in "links".
-     linksTitle: "" shows the links without a heading.
+   The content no longer lives here. It is in two files:
+     content/site.json   front page (release), name, label, bio
+     content/works.json  every film and record, in the order shown
+   Edit them through Pages CMS (app.pagescms.org), see README.md.
    ============================================================ */
-const SITE = {
-  name: "Julius Ernst",
-  label: "Mythomania Collection",
-
-  /* FRONT PAGE, top to bottom:
-     1. "release": the newest music release
-     2. "otherReleases": earlier music under Julius Ernst (exact titles from Other work)
-     3. "films": an optional Film section, each film shown in full (empty = no section) */
-  otherReleases: [],
-  films: [],
-
-  release: {
-    title: "[Single title]",
-    date: "30.11.26",
-    tracks: [
-      { title: "[Single title]", length: "00:00" }
-    ],
-    credits: [
-      "Recorded at [place], [year]",
-      "Engineered by [name]",
-      "Mixed by [name]",
-      "Mastered by [name]",
-      "Cover photograph by [name]"
-    ],
-    links: [
-      { label: "YouTube", url: "" },
-      { label: "Spotify", url: "" },
-      { label: "Apple Music", url: "" },
-      { label: "Bandcamp", url: "" }
-    ],
-    physical: []
-  },
-
-  bio: "Musician, director and cinematographer Julius Ernst has been active within the world of music since the early 2010s, moving through a string of bands and aliases. At 19, he toured the United States, and has since played across Europe, including a run opening for fellow Copenhageners Iceage. Alongside the music, he works as a cinematographer and director. Julius graduated from the National Film School of Denmark, where he made fragmented, associative films built as much from sound and music as from image. He now releases music under his given name.",
-
-  archive: [
-    {
-      title: "Film",
-      items: [
-        { title: "All Things Pass and Will Pass Again / Aiuto", year: "2025", slug: "all-things-pass-and-will-pass-again",
-          page: { images: [{ src: "/images/all-things-pass-1.jpg", pos: "50% 15%" }]   /* pos: which part of the still to keep */,
-                  text: ["DCP, 30 min\nDenmark / Italy / Iceland\nItalian / Kurdish / Danish\nDirected by Julius Ernst\nOriginal music by Hari Shankar Kishore", "A sensory, fragmented film about what remains after loss."],
-                  info: [{ label: "IMDb", url: "https://www.imdb.com/title/tt37495596/" }],
-                  links: [
-                    { label: "Ekko", url: "https://www.ekkofilm.dk/awards/2026/bedste-dokumentar/all-things-pass-and-will-pass-again/" }
-                  ] } },
-        { title: "Territorie", year: "2024",
-          page: { images: ["/images/territorie-1.jpg"],
-                  text: ["DCP, 32 min\nDenmark\nDanish / English\nDirected by Julius Ernst", "A father and son, and the unspoken things passed down in an upper-class milieu."] } },
-        { title: "Untitled", year: "2023",
-          page: { text: ["DCP, 15 min\nDenmark\nFarsi / Danish\nDirected by Julius Ernst", "A daughter from the Iranian diaspora visits her parents one evening in the suburbs of Copenhagen, in the early days of the Mahsa Amini uprising."],
-                  linksTitle: "",
-                  links: [{ label: "FAMUFEST", url: "https://famufest.cz/films/film/untitled" }] } },
-        { title: "Gregoris Mountain", year: "2021",
-          page: { text: ["40 min\nGreece\nEnglish / Arabic\nDirected by Julius Ernst", "A portrait of Greg, a young man with roots in Syria, who returns to Greece and finds refuge in his relationship with a mountain."] } }
-      ]
-    },
-    {
-      title: "Music",
-      items: [
-        { title: "Josiah Konder, demos & voice memos", year: "2022",
-          page: {
-            credits: [
-              "Recorded in Athens & Copenhagen",
-              "Produced by Julius Ernst",
-              "Mastered by Albert A. Hertz"
-            ],
-            links: [
-              { label: "Spotify", url: "https://open.spotify.com/album/28r3EesxIz8rpT2TBJYzqh" },
-              { label: "Apple Music", url: "https://music.apple.com/dk/album/demos-ep/1660221459" },
-              { label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/demos-voice-memos" }
-            ],
-            physical: [{ label: "Cassette", url: "https://josiahkonder.bandcamp.com/album/demos-voice-memos" }]
-          } },
-        { title: "Josiah Konder, Through the Stutter", year: "2019",
-          page: {
-            images: ["/images/through.jpg"],
-            credits: [
-              "Recorded at Rhythmic Music Conservatory, Studio B",
-              "Engineered by Tanja Vesterbye Jessen",
-              "Mixed by Jens \"Benz\" Søndergaard at Jens Benz Studio",
-              "Mastered by Joel Krozer at Six Bit Deep",
-              "Cover photograph by Ed Gumuchian",
-              "\u00a0",
-              "Third Coming Records"
-            ],
-            links: [
-              { label: "Spotify", url: "https://open.spotify.com/album/6KHThGw0UB8KLXFbtOFRxn" },
-              { label: "Apple Music", url: "https://music.apple.com/dk/album/through-the-stutter/1476398102" },
-              { label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/through-the-stutter-lp" }
-            ],
-            physical: [{ label: "Vinyl", url: "" }]
-          } },
-        { title: "Josiah Konder, Songs for the Stunned", year: "2018",
-          page: {
-            credits: [
-              "Recorded at The Royal Danish Academy of Music",
-              "Engineered by Sam Bower",
-              "Mixed & mastered by Boris Wilsdorf at andereBaustelle Ton Studio",
-              "Cover photograph by Christopher Anderson",
-              "\u00a0",
-              "Third Coming Records"
-            ],
-            links: [
-              { label: "Spotify", url: "https://open.spotify.com/album/7BvYgsM62VbmafwZKd2M9a" },
-              { label: "Apple Music", url: "https://music.apple.com/dk/album/songs-for-the-stunned/1389108948" },
-              { label: "Bandcamp", url: "https://josiahkonder.bandcamp.com/album/songs-for-the-stunned-lp" }
-            ],
-            physical: [{ label: "Vinyl", url: "" }]
-          } },
-        { title: "J.E. Useless, Three Stages of Creative Death", year: "2014",
-          page: {
-            credits: [
-              "Recorded on a TASCAM 488",
-              "Engineered & mixed by Julius Ernst & Anton Funck",
-              "Mastered by Peter Peter",
-              "\u00a0",
-              "Mythomania Col."
-            ],
-            links: [{ label: "Bandcamp", url: "https://jemusic.bandcamp.com/album/three-stages-of-creative-death" }],
-            physical: [{ label: "Vinyl (Discogs)", url: "https://www.discogs.com/release/7019306-JE-Useless-Three-Stages-of-Creative-Death" }]
-          } },
-        { title: "Ocean View, Ocean.Puke.Future.", year: "2013" },
-        { title: "Ocean View, No End", year: "2012" }
-      ]
-    }
-  ]
-};
-/* ===================== end of edit area ===================== */
+let SITE = null, WORKS = [];
 
 /* ---------- the site itself: no need to edit below ---------- */
 const app = document.getElementById("app");
@@ -149,9 +12,9 @@ const app = document.getElementById("app");
 const caps = s => esc(s).replace(/\bDCP\b/g, '<span class="caps">DCP</span>');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const slug = s => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const items = SITE.archive.flatMap(s => s.items);
-const pathOf = it => it.slug || slug(it.title);
-const findWork = k => items.find(x => x.page && (pathOf(x) === k || slug(x.title) === k));
+const pathOf = it => (it.slug && it.slug.trim()) || slug(it.title);
+const findWork = k => WORKS.find(x => x.page && (pathOf(x) === k || slug(x.title) === k));
+const has = a => Array.isArray(a) && a.length > 0;
 
 const link = l => l.url
   ? `<li><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></li>`
@@ -163,21 +26,24 @@ function titleCell(it) {
   return `<span>${esc(it.title)}</span>`;
 }
 
-const pics = (p, film) => (p && p.images && p.images.length) ?
-  `<section class="imgs${film ? " film" : ""}">${p.images.map(im => typeof im === "string" ? im : im).map(im => {
-    const src = typeof im === "string" ? im : im.src, pos = typeof im === "string" ? "" : (im.pos || "");
-    return `<img src="${esc(src)}" alt="" loading="lazy"${pos ? ` style="object-position:${esc(pos)}"` : ""}>`;
+/* pictures: like the shop page we copied, every picture sits in a tall 1:2 frame,
+   140% of the screen high; "big" fills 88% of the frame width, "small" 52%.
+   films are always shown in a 3:2 frame; "focus" picks which part to keep (e.g. "50% 20%") */
+const pics = (p, film) => has(p.images) ?
+  `<section class="imgs${film ? " film" : ""}">${p.images.filter(im => im && (im.image || typeof im === "string")).map(im => {
+    const src = typeof im === "string" ? im : im.image, size = (im.size === "small") ? "small" : "big";
+    const focus = (im.focus || "").trim();
+    return `<figure class="frame ${size}"><img src="${esc(src)}" alt="" loading="lazy"${focus ? ` style="object-position:${esc(focus)}"` : ""}></figure>`;
   }).join("")}</section>` : "";
 
 function blocks(p) {
   let out = "";
-  if (p.text && p.text.length) out += `<section class="text">${p.text.map(t => `<p>${esc(t)}</p>`).join("")}</section>`;
-  if (p.credits && p.credits.length) out += `<section class="lines">${p.credits.map(c => `<div>${esc(c)}</div>`).join("")}</section>`;
-  if (p.links && p.links.length) {
-    const t = p.linksTitle === undefined ? "Digital" : p.linksTitle;
+  if (has(p.credits)) out += `<section class="lines">${p.credits.map(c => `<div>${c.trim() ? esc(c) : "&nbsp;"}</div>`).join("")}</section>`;
+  if (has(p.links)) {
+    const t = (p.linksTitle === undefined || p.linksTitle === null) ? "Digital" : p.linksTitle;
     out += `<section>${t ? `<h2>${esc(t)}</h2>` : ""}<ul>${p.links.map(link).join("")}</ul></section>`;
   }
-  if (p.physical && p.physical.length) out += `<section><h2>Physical</h2><ul>${p.physical.map(link).join("")}</ul></section>`;
+  if (has(p.physical)) out += `<section><h2>Physical</h2><ul>${p.physical.map(link).join("")}</ul></section>`;
   return out;
 }
 
@@ -185,18 +51,18 @@ const rows = list => `<ol class="rows">${list.map((it, i) =>
   `<li><span>${i + 1}. ${titleCell(it)}</span><span class="y">${esc(it.year || "")}</span></li>`).join("")}</ol>`;
 
 function others() {
-  const list = (SITE.otherReleases || []).map(t => items.find(x => x.title === t)).filter(Boolean);
+  const list = (SITE.otherReleases || []).map(t => WORKS.find(x => x.title === t)).filter(Boolean);
   return list.length ? `<section><h2>Releases</h2>${rows(list)}</section>` : "";
 }
 
 function filmsSection() {
-  const list = (SITE.films || []).map(t => items.find(x => x.title === t && x.page)).filter(Boolean);
+  const list = (SITE.films || []).map(t => WORKS.find(x => x.title === t && x.page)).filter(Boolean);
   return list.length ? `<section class="part"><h2>Film</h2></section>` + list.map(work).join("") : "";
 }
 
 function home() {
   const r = SITE.release;
-  const tracks = `<ol class="tracks">${r.tracks.map((t, i) =>
+  const tracks = `<ol class="tracks">${(r.tracks || []).map((t, i) =>
     `<li><span>${i + 1}. ${esc(t.title)}</span><span class="y">${esc(t.length)}</span></li>`).join("")}</ol>`;
   return pics(r) + `<section class="label"><h1>${esc(SITE.name)} – ${esc(r.title)}</h1><div>${esc(r.date)}</div></section>` +
     `<section>${tracks}</section>` + blocks(r) + others() + filmsSection() +
@@ -204,7 +70,8 @@ function home() {
 }
 
 function archive() {
-  return SITE.archive.map(s => `<section><h2>${esc(s.title)}</h2>${rows(s.items)}</section>`).join("") +
+  const sections = [...new Set(WORKS.map(w => w.section || "Other"))];
+  return sections.map(s => `<section><h2>${esc(s)}</h2>${rows(WORKS.filter(w => (w.section || "Other") === s))}</section>`).join("") +
     `<section class="text bio"><p>${esc(SITE.bio)}</p></section>` +
     `<nav class="nav"><a href="/" class="back" aria-label="Back"><span class="back-mark" aria-hidden="true"></span></a></nav>`;
 }
@@ -212,23 +79,31 @@ function archive() {
 /* a work page opens like a label next to a piece of art:
    title, year and the facts (format, place, language or credits) as one tight block */
 function work(it) {
-  const p = Object.assign({}, it.page);
-  let facts = [], about = [];
-  const isFilm = !!(p.text && p.text.length && p.text[0].includes("\n"));
-  const pictures = pics(p, isFilm);
-  if (p.credits && p.credits.length) { facts = p.credits; p.credits = []; }
-  else if (p.text && p.text.length && p.text[0].includes("\n")) {
-    /* films: description first, then the technical lines */
-    facts = p.text[0].split("\n"); about = p.text.slice(1); p.text = [];
-  }
-  const label = `<section class="label"><h2>${esc(it.title)}</h2>` +
-    (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") +
-    about.map(t => `<p class="about">${esc(t)}</p>`).join("") +
-    facts.map(f => `<div>${caps(f)}</div>`).join("") +
-    (p.info || []).map(l => `<div><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></div>`).join("") + `</section>`;
-  return pictures + label + blocks(p);
+  const isFilm = it.section === "Film";
+  const head = `<section class="label head"><h2>${esc(it.title)}</h2>` +
+    (it.year ? `<div class="yr">${esc(it.year)}</div>` : "") + `</section>`;
+  const info = `<section class="label info">` +
+    (it.about && it.about.trim() ? `<p class="about">${esc(it.about)}</p>` : "") +
+    (it.details || []).map(f => `<div>${f.trim() ? caps(f) : "&nbsp;"}</div>`).join("") +
+    (it.info || []).filter(l => l.url).map(l => `<div><a href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a></div>`).join("") + `</section>`;
+  const tracks = has(it.tracks) ? `<section class="tl"><ol class="tracks">${it.tracks.map((t, i) =>
+    `<li><span>${i + 1}. ${esc(t.title)}</span><span class="y">${esc(t.length || "")}</span></li>`).join("")}</ol></section>` : "";
+  /* four columns across the top: title, details, links, tracklist; then the pictures */
+  return `<div class="top">${head}${info}<div class="side">${blocks(it)}</div>${tracks}</div>` + pics(it, isFilm);
 }
 const detail = it => work(it) + `<nav class="nav"><a href="/" class="back" aria-label="Back"><span class="back-mark" aria-hidden="true"></span></a></nav>`;
+
+/* the picture strip on a work page scrolls sideways with the normal scroll wheel */
+function strip() {
+  const g = document.querySelector(".is-work .imgs");
+  if (!g) return;
+  g.addEventListener("wheel", e => {
+    if (g.scrollWidth <= g.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    const atStart = g.scrollLeft <= 0, atEnd = g.scrollLeft + g.clientWidth >= g.scrollWidth - 1;
+    if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
+    e.preventDefault(); g.scrollLeft += e.deltaY;
+  }, { passive: false });
+}
 
 function setCanonical(path) {
   let l = document.querySelector('link[rel="canonical"]');
@@ -248,7 +123,7 @@ function render() {
     app.innerHTML = archive(); document.title = `Other work – ${SITE.name}`; setCanonical("/other-work/");
   } else if (it) {
     document.body.classList.add("is-work");
-    app.innerHTML = detail(it); document.title = `${it.title} – ${SITE.name}`; setCanonical("/" + pathOf(it) + "/");
+    app.innerHTML = detail(it); strip(); document.title = `${it.title} – ${SITE.name}`; setCanonical("/" + pathOf(it) + "/");
   } else {
     app.innerHTML = home(); document.title = SITE.name; setCanonical("/");
   }
@@ -262,7 +137,12 @@ document.addEventListener("click", e => {
     e.preventDefault(); history.back();
   }
 });
-render();
+Promise.all(["/content/site.json", "/content/works.json"].map(u => fetch(u, { cache: "no-cache" }).then(r => r.json())))
+  .then(([s, w]) => {
+    SITE = s; WORKS = w;
+    render();
+    app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/">${esc(SITE.label || "Mythomania Collection")}</a></header>`);
+  });
 document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="true"></div><div class="crt" aria-hidden="true"></div>`);
 /* the tower: five more pieces of the corner picture stacked on top of it (top to bottom) */
 (function () {
@@ -272,4 +152,3 @@ document.body.insertAdjacentHTML("afterbegin", `<div class="mark" aria-hidden="t
     .map(t => `<img src="/images/${t}.jpg?v=6" alt="">`).join("");
   home.insertAdjacentHTML("afterbegin", tiles);
 })();
-app.insertAdjacentHTML("beforebegin", `<header class="mm"><a href="/">${esc(SITE.label || "Mythomania Collection")}</a></header>`);

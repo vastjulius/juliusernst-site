@@ -1,0 +1,43 @@
+{
+  "name": "Julius Ernst",
+  "label": "Mythomania Collection",
+  "bio": "Musician, director and cinematographer Julius Ernst has been active within the world of music since the early 2010s, moving through a string of bands and aliases. At 19, he toured the United States, and has since played across Europe, including a run opening for fellow Copenhageners Iceage. Alongside the music, he works as a cinematographer and director. Julius graduated from the National Film School of Denmark, where he made fragmented, associative films built as much from sound and music as from image. He now releases music under his given name.",
+  "release": {
+    "title": "[Single title]",
+    "date": "30.11.26",
+    "tracks": [
+      {
+        "title": "[Single title]",
+        "length": "00:00"
+      }
+    ],
+    "credits": [
+      "Recorded at [place], [year]",
+      "Engineered by [name]",
+      "Mixed by [name]",
+      "Mastered by [name]",
+      "Cover photograph by [name]"
+    ],
+    "links": [
+      {
+        "label": "YouTube",
+        "url": ""
+      },
+      {
+        "label": "Spotify",
+        "url": ""
+      },
+      {
+        "label": "Apple Music",
+        "url": ""
+      },
+      {
+        "label": "Bandcamp",
+        "url": ""
+      }
+    ],
+    "physical": []
+  },
+  "otherReleases": [],
+  "films": []
+}
